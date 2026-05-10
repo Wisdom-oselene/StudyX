@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+    <div class="glass">
+        <h1>Study smarter. Stay consistent.</h1>
+        <p>StudyX is your offline-first study tracker with focus timers, streaks, and rich analytics.</p>
+        <div class="cta-row">
+            <a href="{% url 'dashboard' %}" class="btn">Open Dashboard</a>
+            <a href="{% url 'timer' %}" class="ghost-btn">Start Focus Session</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

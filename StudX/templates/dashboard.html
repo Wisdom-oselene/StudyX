@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<!-- Dashboard-specific CSS -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="hud-container">
+    <header class="hud-header">
+        <div class="glitch-wrapper">
+            <h1 class="hud-title" data-text="SYSTEM OVERVIEW">SYSTEM OVERVIEW</h1>
+        </div>
+        <div class="system-status">
+            <span class="pulse-dot"></span>
+            <span class="status-text">CORE ACTIVE</span>
+        </div>
+    </header>
+
+    <!-- Top Tier: Primary Metrics -->
+    <section class="metric-grid">
+        <div class="metric-hex">
+            <span class="label">TOTAL_STUDY_TIME</span>
+            <span class="value">{{ total_studied }}</span>
+        </div>
+        <div class="metric-hex">
+            <span class="label">DAILY_QUOTA</span>
+            <span class="value">{{ today_studied }}</span>
+        </div>
+        <div class="metric-hex">
+            <span class="label">STREAK_STABILITY</span>
+            <span class="value">{{ streak }}<small>DAYS</small></span>
+        </div>
+    </section>
+
+    <div class="main-hud-layout">
+        <!-- Subject Data -->
+        <aside class="panel subject-panel">
+            <div class="panel-header">SUBJECT_MATRICES</div>
+            <div class="panel-body">
+                {% for item in subject_totals %}
+                <div class="subject-module">
+                    <div class="module-info">
+                        <span class="name">{{ item.name }}</span>
+                        <span class="time">{{ item.total_seconds|floatformat:0 }}s</span>
+                    </div>
+                    <div class="data-bar">
+                        <div class="fill" style="background: {{ item.color }}; width: 70%; box-shadow: 0 0 10px {{ item.color }};"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </aside>
+
+        <!-- Activity Feed -->
+        <aside class="panel activity-panel">
+            <div class="panel-header">TEMPORAL_LOGS</div>
+            <div class="panel-body">
+                {% for session in recent_sessions %}
+                <div class="log-entry">
+                    <span class="timestamp">[{{ session.start_time|date:"H:i" }}]</span>
+                    <span class="event">{{ session.subject.name }}</span>
+                    <span class="duration">+{{ session.duration_seconds }}s</span>
+                </div>
+                {% endfor %}
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

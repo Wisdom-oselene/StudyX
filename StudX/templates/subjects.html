@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/subjects.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="subjects-interface">
+    <div class="interface-header">
+        <h2>SUBJECT_DATABASE_MANAGEMENT</h2>
+    </div>
+
+    <section class="grid-split">
+        <!-- LEFT: ADD DATA -->
+        <article class="data-panel">
+            <div class="panel-tag">NEW_ENTRY_PROTOCOL</div>
+            <h3>INITIALIZE_SUBJECT</h3>
+            <form method="post" class="stack hud-form">
+                {% csrf_token %}
+                
+                <!-- Manually rendering fields to ensure HUD styling -->
+                <div class="input-group">
+                    <label class="hud-label">ENTITY_NAME</label>
+                    <input type="text" name="name" class="hud-input" placeholder="Enter name..." required>
+                </div>
+
+                <div class="input-group">
+                    <label class="hud-label">COLOR_HEX_CODE</label>
+                    <input type="color" name="color" class="hud-color-picker" value="#00f2ff">
+                </div>
+
+                <button class="btn-engage" type="submit">COMMIT_CHANGES</button>
+            </form>
+        </article>
+
+        <!-- RIGHT: EXISTING DATA -->
+        <article class="data-panel scroll-y">
+            <div class="panel-tag">ACTIVE_RECORDS</div>
+            <h3>REGISTERED_ENTITIES</h3>
+            <div class="ledger-list">
+                {% for subject in subjects %}
+                    <div class="ledger-row">
+                        <form method="post" action="{% url 'edit_subject' subject.id %}" class="inline-hud-form">
+                            {% csrf_token %}
+                            <div class="inline-inputs">
+                                <input name="name" class="hud-input-sm" value="{{ subject.name }}">
+                                <div class="color-wrapper" style="--subj-color: {{ subject.color }}">
+                                    <input name="color" type="color" value="{{ subject.color }}">
+                                </div>
+                            </div>
+                            <button class="btn-mini" type="submit">UPDATE</button>
+                        </form>
+                        
+                        <form method="post" action="{% url 'delete_subject' subject.id %}" class="delete-form">
+                            {% csrf_token %}
+                            <button class="btn-danger-mini" type="submit">PURGE</button>
+                        </form>
+                    </div>
+                {% empty %}
+                    <p class="empty-msg">DATABASE_EMPTY: NO_RECORDS_FOUND</p>
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+</div>
+{% endblock %}

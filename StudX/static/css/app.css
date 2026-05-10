@@ -1,0 +1,312 @@
+:root {
+    --bg-color: #050505;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-color: #00f2ff;
+    /* Cyber Blue */
+    --text-main: #e0e0e0;
+    --text-dim: #999;
+    --glow-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background Effects */
+.bg-glow {
+    position: fixed;
+    top: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.07) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.bg-blob {
+    position: fixed;
+    bottom: -5%;
+    left: -5%;
+    width: 30vw;
+    height: 30vw;
+    background: radial-gradient(circle, rgba(125, 0, 255, 0.05) 0%, transparent 70%);
+    z-index: -1;
+}
+
+/* Navigation */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.brand span {
+    color: var(--accent-color);
+    text-shadow: var(--glow-shadow);
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Glass Content Area */
+.content-wrapper {
+    padding: 2rem 4rem;
+}
+
+.glass-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    min-height: 70vh;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Buttons & UI Elements */
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.btn-icon:hover {
+    border-color: var(--accent-color);
+    box-shadow: var(--glow-shadow);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: var(--glow-shadow);
+}
+
+/* Alerts */
+.alerts {
+    margin-bottom: 1.5rem;
+}
+
+.alert {
+    background: rgba(0, 242, 255, 0.1);
+    border-left: 3px solid var(--accent-color);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+
+
+
+
+/* --- UNIVERSAL HUD DROPDOWN SYSTEM --- */
+
+/* Wrapper to maintain positioning for the custom arrow */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.hud-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* Technical Background */
+    background-color: rgba(0, 242, 255, 0.02);
+    /* Custom SVG Arrow: Sharp Cyan Chevron */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300f2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+
+    /* Typography & Borders */
+    color: var(--accent, #00f2ff);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 0;
+    /* Square edges feel more industrial */
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+/* Hover & Focus Interactions */
+.hud-select:hover {
+    background-color: rgba(0, 242, 255, 0.07);
+    border-color: rgba(0, 242, 255, 0.6);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+}
+
+.hud-select:focus {
+    outline: none;
+    border-color: var(--accent, #00f2ff);
+    background-color: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2), inset 0 0 10px rgba(0, 242, 255, 0.05);
+}
+
+/* The Option Menu (The popup part) */
+.hud-select option {
+    background-color: #0a0c10;
+    /* Darker than body to stand out */
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 12px;
+}
+
+/* Optional: Label styling for the HUD inputs */
+.hud-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+}
+
+
+
+
+
+.pulse {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* --- RESET / OVERRIDE --- */
+.main-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hud-icon {
+    display: none;
+}
+
+/* Hidden on desktop for cleaner look */
+
+/* --- MOBILE ADAPTATION (THE FIX) --- */
+@media (max-width: 768px) {
+    .main-nav {
+        display: grid !important;
+        /* Force visibility */
+        grid-template-columns: repeat(4, 1fr);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(5, 7, 10, 0.95);
+        /* Deep dark for visibility */
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--accent);
+        /* Glowing top border */
+        padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+        gap: 0;
+        z-index: 9999;
+        /* Stay above everything */
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-dim) !important;
+        font-size: 0.6rem !important;
+        letter-spacing: 1px;
+    }
+
+    .hud-icon {
+        display: block;
+        /* Show icons on mobile for easier tapping */
+        font-size: 1.4rem;
+        margin-bottom: 4px;
+        color: var(--accent);
+    }
+
+    .link-text {
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Active State Glow */
+    .nav-link:active,
+    .nav-link:focus {
+        color: var(--accent) !important;
+        text-shadow: 0 0 10px var(--accent);
+    }
+
+    /* Ensure content doesn't get cut off by the bottom nav */
+    body {
+        padding-bottom: 90px !important;
+    }
+}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/stats.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="stats-interface">
+    <div class="interface-header">
+        <h2>ANALYTICS_TERMINAL v2.0</h2>
+        <div class="export-zone">
+            <a href="{% url 'export_csv' %}" class="btn-outline">
+                <span class="icon">↓</span> EXPORT_DATA.CSV
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Analytics Grid -->
+    <section class="chart-matrix">
+        <article class="chart-cell" data-label="TREND_DAILY">
+            <div class="chart-container">
+                <canvas id="dailyChart"></canvas>
+            </div>
+        </article>
+        
+        <article class="chart-cell" data-label="DISTRIBUTION_SUBJECT">
+            <div class="chart-container">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </article>
+        
+        <article class="chart-cell" data-label="TREND_WEEKLY">
+            <div class="chart-container">
+                <canvas id="weeklyChart"></canvas>
+            </div>
+        </article>
+    </section>
+
+    <!-- Large Format Visualization -->
+    <section class="main-visualization" data-label="MONTHLY_PRODUCTIVITY_COEFFICIENT">
+        <div class="chart-container-large">
+            <canvas id="monthlyChart"></canvas>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/vendor/chart.umd.min.js' %}"></script>
+<script src="{% static 'js/charts.js' %}"></script>
+{% endblock %}

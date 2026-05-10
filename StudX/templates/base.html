@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyX | Next-Gen Learning</title>
+    
+    <!-- Google Fonts for a tech look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+    {% block head %}{% endblock %}
+
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('{% static "js/sw.js" %}');
+  }
+</script>
+</head>
+<body>
+    <!-- Background Decor for Depth -->
+    <div class="bg-glow"></div>
+    <div class="bg-blob"></div>
+
+<!-- GLOBAL HEADER -->
+<header class="topbar">
+    <a href="{% url 'landing' %}" class="brand">Study<span>X</span></a>
+    
+    <!-- This nav will now handle both Desktop and Mobile logic -->
+    <nav class="main-nav">
+        <a href="{% url 'dashboard' %}" class="nav-link">
+            <span class="hud-icon">▤</span> <span class="link-text">DASHBOARD</span>
+        </a>
+        <a href="{% url 'timer' %}" class="nav-link">
+            <span class="hud-icon">⊙</span> <span class="link-text">CORE</span>
+        </a>
+        <a href="{% url 'subjects' %}" class="nav-link">
+            <span class="hud-icon">◈</span> <span class="link-text">SUBJECTS</span>
+        </a>
+        <a href="{% url 'stats' %}" class="nav-link">
+            <span class="hud-icon">📊</span> <span class="link-text">LOGS</span>
+        </a>
+    </nav>
+
+    <button id="themeToggle" class="btn-icon"><div class="dot"></div></button>
+</header>
+
+    <main class="content-wrapper">
+        {% if messages %}
+            <div class="alerts">
+                {% for message in messages %}
+                    <div class="alert pulse">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <section class="glass-container">
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+
+    <script src="{% static 'js/app.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/timer.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="timer-interface">
+    <!-- LEFT PANEL: CONFIGURATION -->
+    <aside class="control-panel left">
+        <div class="panel-tag">SESSION_CONFIG</div>
+        
+<div class="input-module">
+    <label class="hud-label">TARGET_SUBJECT</label>
+    <div class="select-wrapper">
+        <select id="subjectSelect" class="hud-select">
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="input-module">
+    <label class="hud-label">FOCUS_MODE</label>
+    <div class="select-wrapper">
+        <select id="modeSelect" class="hud-select">
+            <option value="pomodoro">POMODORO_PROTOCOL</option>
+            <option value="deep">DEEP_WORK_SYNC</option>
+            <option value="custom">CUSTOM_SET</option>
+        </select>
+    </div>
+</div>
+        <div class="input-module" id="customInputGroup">
+            <label>DURATION (MIN)</label>
+            <input type="number" id="customMinutes" value="30" class="hud-input">
+        </div>
+
+        <div class="status-box">
+            <span class="status-indicator"></span>
+            <p id="timerStatus">READY_FOR_INITIATION</p>
+        </div>
+    </aside>
+
+    <!-- CENTER: THE REACTOR CORE -->
+    <main class="reactor-core">
+        <div class="ring-container">
+            <div class="outer-ring"></div>
+            <div id="timerDisplay">25:00</div>
+        </div>
+
+        <div class="tactical-controls">
+            <button id="startBtn" class="btn-glow">ENGAGE</button>
+            <button id="pauseBtn" class="btn-sub">HALT</button>
+            <button id="resetBtn" class="btn-sub">RESET</button>
+        </div>
+    </main>
+
+    <!-- RIGHT PANEL: TELEMETRY -->
+    <aside class="control-panel right">
+        <div class="panel-tag">LIVE_TELEMETRY</div>
+
+        <div class="telemetry-box">
+            <p>DAILY_TOTAL</p>
+            <h2 class="cyan-text">2h 10m</h2>
+        </div>
+
+        <div class="telemetry-box">
+            <p>STREAK_STABILITY</p>
+            <h2 class="purple-text">5 DAYS</h2>
+        </div>
+
+        <div class="telemetry-box">
+            <p>CYCLE_COUNT</p>
+            <h2>04</h2>
+        </div>
+    </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/timer.js' %}"></script>
+{% endblock %}

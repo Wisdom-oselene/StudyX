@@ -1,0 +1,15 @@
+{
+    "name": "StudyX Mission Control",
+    "short_name": "StudyX",
+    "start_url": "/dashboard/",
+    "display": "standalone",
+    "background_color": "#08090a",
+    "theme_color": "#00f2ff",
+    "icons": [
+        {
+            "src": "/static/images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
